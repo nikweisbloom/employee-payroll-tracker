@@ -2,19 +2,69 @@
 const addEmployeesBtn = document.querySelector('#add-employees-btn');
 
 // Collect employee data
+
 const collectEmployees = function () {
   // TODO: Get user input to create and return an array of employee objects
-};
+  
+//Created an array of employees
+const employeesArray = [];
+
+//Added prompts for the user to input Employee data
+        let userFirstName = prompt('Enter first name of Employee:');
+        let userLastName = prompt ('Enter last name of Employee:');
+        //Added parseFloat function to the prompt to see if it's a number or NaN
+        let userSalary = parseFloat(prompt('Enter salary of Employee:'));
+            if(isNaN(userSalary)){
+              userSalary = 0;
+              return collectEmployees()
+            };
+             
+              //Defined the collected data into a variable
+            let employee = {
+                firstName: userFirstName,
+                lastName: userLastName,
+                salary: userSalary
+            };
+
+          //Inserted collected variables into Array of Employees
+            employeesArray.push(employee);
+            
+            //Added a prompt to see if the user wants to add more employees
+            let keepGoing = confirm('Add another?');
+
+            if (keepGoing){
+              return collectEmployees();
+            } 
+            else {
+              return employeesArray;
+            };
+          }
+
 
 // Display the average salary
 const displayAverageSalary = function (employeesArray) {
   // TODO: Calculate and display the average salary
+
+//Defined the total to find the average of
+  let total = 0;
+  for (let i = 0; i < employeesArray.length; i++){
+    sum += employeesArray[i].salary;
+  }
+  let average = total / employeesArray.length;
+  console.log ('Average salary of Employees:', average)
 };
 
 // Select a random employee
 const getRandomEmployee = function (employeesArray) {
   // TODO: Select and display a random employee
+
+
+
 };
+
+
+
+
 
 /*
   ====================
