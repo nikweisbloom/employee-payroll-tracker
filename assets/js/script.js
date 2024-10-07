@@ -7,8 +7,11 @@ const employeesArray = [];
 const collectEmployees = function () {
   // TODO: Get user input to create and return an array of employee objects
 
+  //Variable for the while 
+let keepGoing = true;
+
 //Added prompts for the user to input Employee data using a while loop
-while(employeesArray){
+while(keepGoing){
         const userFirstName = prompt('Enter first name of Employee:');
         const userLastName = prompt ('Enter last name of Employee:');
        
@@ -17,7 +20,6 @@ while(employeesArray){
             if(isNaN(userSalary)){
               userSalary = 0;
               alert('Invalid number.')
-              return collectEmployees()
             };
              
               //Defined the collected data into a variable
@@ -31,36 +33,41 @@ while(employeesArray){
             employeesArray.push(employee);
           
             //Added a prompt to see if the user wants to add more employees
-            let keepGoing = confirm('Add another?');
-
-            if (keepGoing){
-              return collectEmployees();
-            } else {
-              return employeesArray;
-            }
+            keepGoing = confirm('Add another?');
           }
-        }
+
+            //Returned the array
+              return employeesArray;
+        };
         
 
 // Display the average salary
 const displayAverageSalary = function (employeesArray) {
   // TODO: Calculate and display the average salary
 
+  if (employeesArray.length === 0) {
+    console.log("No employees collected.");
+    return;
+  }
 //Defined the total to find the average of
 let total = 0;
 for (let i = 0; i < employeesArray.length; i++) {
-  total += parseFloat(employeesArray[i].userSalary)
+  total += employeesArray[i].salary;
 }  
 const averageSalary = total / employeesArray.length;
 
   //Logs the Average salary in the console
-  console.log (`Average salary of Employees: ${averageSalary}`)
-  
+  console.log (`Average salary of Employees: ${averageSalary.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}`);
 };
 
 // Select a random employee
 const getRandomEmployee = function (employeesArray) {
   // TODO: Select and display a random employee
+if(employeesArray.length === 0) {
+  console.log("No employees collected.")
+  return
+}
+
   const random = Math.floor(Math.random() * employeesArray.length);
   const randomEmployee = employeesArray[random];
 
